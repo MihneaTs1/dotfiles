@@ -41,5 +41,4 @@ vim.o.number=true
 vim.cmd([[
 colorscheme tokyonight-night
 set clipboard=unnamedplus
-set mouse=
 ]])
