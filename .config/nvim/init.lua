@@ -18,14 +18,14 @@ q
 
 require("autoclose").setup()
 require("competitest").setup {
-        received_problems_path = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)/>
-        received_contests_directory = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONT>
-        received_contests_problems_path = "$(PROBLEM)/main.$(FEXT)",
+        received_problems_path = "$(HOME)/Competitive Programming/$(JUDGE)/$(CONTEST)/$(PROBLEM).$(FEXT)",
+	received_contests_directory = "$(HOME)/Competitive Programming/$(JUDGE)/$(CONTEST)",
+ 	received_contests_problems_path = "$(PROBLEM)/main.$(FEXT)",
         compile_command = {
-                cpp = { exec = "g++", args = { "-std=gnu++23", "-Wall", "-DLOCAL", "$(FNAME)", ">
+                cpp = { exec = "g++", args = { "-std=gnu++23", "-Wall", "-DLOCAL", "$(FNAME)", "-o", "$(FNOEXT)" } },
         },
 
-        testcases_directory = "./tests",
+        testcases_directory = "./.competitest",
         template_file = "$(HOME)/Documents/Programming/Competitive/Template/template.cpp",
         evaluate_template_modifiers = true,
 }
