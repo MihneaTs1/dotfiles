@@ -25,7 +25,7 @@ q
 
 require("autoclose").setup()
 require("competitest").setup {
-	received_problems_path = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)/$(PROBLEM).$(FEXT)",
+	received_problems_path = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)/$(PROBLEM)/main.$(FEXT)",
 	received_contests_directory = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)",
 	received_contests_problems_path = "$(PROBLEM)/main.$(FEXT)",
 	compile_command = {
@@ -33,7 +33,7 @@ require("competitest").setup {
 	},
 
 	testcases_directory = "./.competitest",
-	template_file = "$(HOME)/Documents/Programming/Competitive/Template/template.cpp",
+	template_file = "$(HOME)/.config/nvim/template/template.cpp",
 	evaluate_template_modifiers = true,
 }
 require("nvim-treesitter.configs").setup {
