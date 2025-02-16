@@ -113,4 +113,5 @@ vim.o.number=true
 vim.cmd([[
 	set clipboard=unnamedplus
 	colorscheme tokyonight-night
+	set noshowmode
 ]])
