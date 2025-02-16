@@ -37,34 +37,31 @@ ofstream fout(TASK_NAME + ".out");
 #define uint unsigned int
 #endif
 
-class solution {
-public:
-	// $(JUDGE)/$(CONTEST)/$(PROBLEM) 
-	// TL: $(TIMELIM) ms
-	// ML: $(MEMLIM) MB	
+// $(JUDGE)/$(CONTEST)/$(PROBLEM) 
+// TL: $(TIMELIM) ms
+// ML: $(MEMLIM) MB	
 
-	void pregen() {
-		
-	}
+void pregen() {
+	
+}
 
-	unsigned TESTCASE_COUNT = 1;
-	void run(const unsigned &TESTCASE) {
+unsigned TESTCASE_COUNT = 1;
+void run(const unsigned &TESTCASE) {
 
-	}
+}
 
-	solution() {
-		pregen();
-		if (MULTIPLE_TESTCASES)
-			cin >> TESTCASE_COUNT;
-		for (unsigned TESTCASE = 1; TESTCASE <= TESTCASE_COUNT; run(TESTCASE ++));
-	}
-};
+void solution() {
+	pregen();
+	if (MULTIPLE_TESTCASES)
+		cin >> TESTCASE_COUNT;
+	for (unsigned TESTCASE = 1; TESTCASE <= TESTCASE_COUNT; run(TESTCASE ++));
+}
 
 signed main() {
 #if DSYNC_WITH_STDIO == 1
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 #endif
-	solution sol;
+	solution();
 	return 0;
 }
