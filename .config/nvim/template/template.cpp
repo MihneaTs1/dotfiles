@@ -50,18 +50,14 @@ void run(const unsigned &TESTCASE) {
 
 }
 
-void solution() {
-	pregen();
-	if (MULTIPLE_TESTCASES)
-		cin >> TESTCASE_COUNT;
-	for (unsigned TESTCASE = 1; TESTCASE <= TESTCASE_COUNT; run(TESTCASE ++));
-}
-
 signed main() {
 #if DSYNC_WITH_STDIO == 1
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 #endif
-	solution();
+	pregen();
+	if (MULTIPLE_TESTCASES)
+		cin >> TESTCASE_COUNT;
+	for (unsigned TESTCASE = 1; TESTCASE <= TESTCASE_COUNT; run(TESTCASE ++));
 	return 0;
 }
