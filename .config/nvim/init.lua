@@ -9,11 +9,13 @@ vim.cmd([[
 call plug#begin()
 
 Plug 'm4xshen/autoclose.nvim'
-Plug 'folke/tokyonight.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'xeluxee/competitest.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-tree/nvim-tree.lua'
+Plug 'folke/tokyonight.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
 PlugInstall
@@ -42,12 +44,13 @@ require("nvim-treesitter.configs").setup {
 	},
 }
 require("nvim-tree").setup()
+require("lualine").setup()
 
 vim.o.tabstop=4
 vim.o.shiftwidth=4
 vim.o.number=true
 vim.cmd([[
-	colorscheme tokyonight-night
 	set clipboard=unnamedplus
+	colorscheme tokyonight-night
 	NvimTreeOpen
 ]])
