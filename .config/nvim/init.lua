@@ -135,7 +135,7 @@ require('dashboard').setup({
     },
     footer = {
       "Happy Coding!",
-	  "https://github.com/MihneaTs1/dotfiles",
+      "https://github.com/MihneaTs1/dotfiles",
     },
   },
 })
