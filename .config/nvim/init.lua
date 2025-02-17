@@ -16,7 +16,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim:Com run", { silent = true })'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvimdev/dashboard-nvim'
 
@@ -121,7 +121,7 @@ require('dashboard').setup({
         key_format = ' %s',
         action = 'edit ~/.config/nvim/init.lua',
       },
-      {
+	  {
         icon = ' ',
         icon_hl = 'Title',
         desc = 'Quit',
@@ -150,3 +150,4 @@ vim.cmd([[
 	colorscheme tokyonight-night
 	set noshowmode
 ]])
+vim.keymap.set("n", "<C-r>", ":Com run\n", { silent = true })
