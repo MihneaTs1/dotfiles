@@ -48,6 +48,7 @@ require("nvim-treesitter.configs").setup {
 }
 require("nvim-tree").setup()
 require("lualine").setup()
+
 require('dashboard').setup({
   theme = 'doom',
   config = {
@@ -62,8 +63,31 @@ require('dashboard').setup({
 	  ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
       "",
 	  "",
-  },
+    },
     center = {
+	{
+        icon = ' ',
+        icon_hl = 'Title',
+        desc = 'New File',
+        desc_hl = 'String',
+        key = 'n',
+        keymap = 'enew',
+        key_hl = 'Number',
+        key_format = ' %s',
+        action = 'enew',
+      },
+      {
+        icon = ' ',
+        icon_hl = 'Title',
+        desc = 'Receive Problem',
+        desc_hl = 'String',
+        key = 'p',
+        keymap = 'Com receive problem',
+        key_hl = 'Number',
+        key_format = ' %s',
+        action = 'Com receive problem',
+      },
+
       {
         icon = ' ',
         icon_hl = 'Title',
@@ -72,7 +96,7 @@ require('dashboard').setup({
         key = 'f',
         keymap = 'Telescope find_files',
         key_hl = 'Number',
-        key_format = ' %s',  -- This removes the default surrounding brackets
+        key_format = ' %s',
         action = 'Telescope find_files',
       },
       {
@@ -96,6 +120,17 @@ require('dashboard').setup({
         key_hl = 'Number',
         key_format = ' %s',
         action = 'edit ~/.config/nvim/init.lua',
+      },
+	  {
+        icon = ' ',
+        icon_hl = 'Title',
+        desc = 'Quit',
+        desc_hl = 'String',
+        key = 'q',
+        keymap = 'quit',
+        key_hl = 'Number',
+        key_format = ' %s',
+        action = 'quit',
       },
     },
     footer = {
