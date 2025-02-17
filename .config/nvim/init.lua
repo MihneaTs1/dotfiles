@@ -121,7 +121,7 @@ require('dashboard').setup({
         key_format = ' %s',
         action = 'edit ~/.config/nvim/init.lua',
       },
-	  {
+      {
         icon = ' ',
         icon_hl = 'Title',
         desc = 'Quit',
