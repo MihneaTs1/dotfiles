@@ -135,7 +135,7 @@ require('dashboard').setup({
     },
     footer = {
       "Happy Coding!",
-      "https://github.com/nvimdev/dashboard-nvim",
+	  "https://github.com/MihneaTs1/dotfiles",
     },
   },
 })
@@ -150,4 +150,4 @@ vim.cmd([[
 	colorscheme tokyonight-night
 	set noshowmode
 ]])
-vim.keymap.set("n", "<C-r>", ":Com run\n", { silent = true })
+vim.keymap.set("n", "<C-S-r>", ":Com run\n", { silent = true })
