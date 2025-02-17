@@ -11,7 +11,7 @@ call plug#begin()
 Plug 'm4xshen/autoclose.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'xeluxee/competitest.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-lualine/lualine.nvim'
@@ -135,19 +135,18 @@ require('dashboard').setup({
     },
     footer = {
       "Happy Coding!",
-      "https://github.com/MihneaTs1/dotfiles",
+	  "https://github.com/MihneaTs1/dotfiles",
     },
   },
 })
 require("telescope").setup()
-
 
 vim.o.tabstop=4
 vim.o.shiftwidth=4
 vim.o.number=true
 vim.cmd([[
 	set clipboard=unnamedplus
-	colorscheme tokyonight-night
+	set laststatus=3
 	set noshowmode
+	colorscheme tokyonight-night
 ]])
-vim.keymap.set("n", "<C-S-r>", ":Com run\n", { silent = true })
