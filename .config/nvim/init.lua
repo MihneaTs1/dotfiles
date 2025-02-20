@@ -54,7 +54,7 @@ require("dashboard").setup({
     	center = {
       		{ icon = " ", desc = "Find File                            ",      key = "f", action = "Telescope find_files", key_format = "%s" },
     		{ icon = " ", desc = "New File                            ",       key = "n", action = "enew", key_format = "%s" },
-			{ icon = " ", desc = "Recieve Problem                      ", key = "p", action = "Com receive problem", key_format = "%s" },
+		{ icon = " ", desc = "Recieve Problem                      ", key = "p", action = "Com receive problem", key_format = "%s" },
      		{ icon = " ", desc = "Recent Files                            ",   key = "r", action = "Telescope oldfiles", key_format = "%s" },
       		{ icon = " ", desc = "Find Text                            ",      key = "t", action = "Telescope live_grep", key_format = "%s" },
       		{ icon = " ", desc = "Config                            ",         key = "c", action = "edit ~/.config/nvim/init.lua", key_format = "%s" },
