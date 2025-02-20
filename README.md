@@ -1,4 +1,4 @@
-Some Neovim dotfiles that I use for programming.
+The Neovim dotfiles that I use for programming.
 
 ## Installation
 
