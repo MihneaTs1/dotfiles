@@ -1,69 +1,42 @@
 vim.opt.termguicolors = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 -- Plugins
-vim.cmd
-[[
 
-call plug#begin()
+vim.cmd([[
+	call plug#begin()
 
-Plug 'MunifTanjim/nui.nvim'
-Plug 'rcarriga/nvim-notify'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-lua/plenary.nvim'
+	Plug 'MunifTanjim/nui.nvim'
+	Plug 'rcarriga/nvim-notify'
+	Plug 'nvim-tree/nvim-web-devicons'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'folke/tokyonight.nvim'
-Plug 'folke/noice.nvim'
-Plug 'nvimdev/dashboard-nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-Plug 'm4xshen/autoclose.nvim'
-Plug 'xeluxee/competitest.nvim'
-Plug 'nvim-tree/nvim-tree.lua'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'folke/tokyonight.nvim'
+	Plug 'm4xshen/autoclose.nvim'
+	Plug 'folke/noice.nvim'
+	Plug 'nvim-lualine/lualine.nvim'
+	Plug 'akinsho/bufferline.nvim'
+	Plug 'xeluxee/competitest.nvim'
 
-call plug#end()
+	call plug#end()
 
-PlugInstall
-q
+	PlugInstall
+	PlugUpdate
+	PlugUpgrade
+	q
+]])
 
-]]
-
+require("nvim-treesitter.configs").setup {
+	ensure_installed = {"c", "cpp", "lua", "vim", "python"},
+	sync_install = true,
+	auto_install = true,
+	highlight = {
+		additional_vim_regex_highlighting = true,
+	}
+}
+require("bufferline").setup()
 require("autoclose").setup()
-require("bufferline").setup{}
 require("lualine").setup()
-require("telescope").setup()
 require("noice").setup()
-require("dashboard").setup({
-	theme = 'doom',
-	config = {
-		header = {
-			'',
-			'',
-			' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-			' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-			' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-			' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-			' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-			' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',	
-			'',
-			'',	
-		},
-    	center = {
-      		{ icon = " ", desc = "Find File                            ",      key = "f", action = "Telescope find_files", key_format = "%s" },
-    		{ icon = " ", desc = "New File                            ",       key = "n", action = "enew", key_format = "%s" },
-		{ icon = " ", desc = "Recieve Problem                      ", key = "p", action = "Com receive problem", key_format = "%s" },
-     		{ icon = " ", desc = "Recent Files                            ",   key = "r", action = "Telescope oldfiles", key_format = "%s" },
-      		{ icon = " ", desc = "Find Text                            ",      key = "t", action = "Telescope live_grep", key_format = "%s" },
-      		{ icon = " ", desc = "Config                            ",         key = "c", action = "edit ~/.config/nvim/init.lua", key_format = "%s" },
-      		{ icon = " ", desc = "Quit                            ",           key = "q", action = "qa", key_format = "%s" },
-    	},
-    	footer = { "https://github.com/MihneaTs1/dotfiles" },
-	},
-})
-require("nvim-tree").setup()
 require("competitest").setup {
 	save_current_file = false,
 	compile_directory = ".",
@@ -87,15 +60,15 @@ require("competitest").setup {
 }
 
 -- Options
+local o = vim.o
+local g = vim.g
+o.tabstop = 4
+o.shiftwidth = 4
+o.laststatus = 3
+o.number = true
+o.relativenumber = true
+o.clipboard = "unnamedplus"
 
-vim.cmd
-[[
-
-set tabstop=4
-set shiftwidth=4
-set laststatus=3
-set clipboard=unnamedplus
-set number
-colorscheme tokyonight-night
-
-]]
+vim.cmd([[
+	colorscheme tokyonight-night
+]])
