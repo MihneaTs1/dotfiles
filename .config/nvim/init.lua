@@ -1,152 +1,100 @@
+vim.opt.termguicolors = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.termguicolors = true
 
 -- Plugins
-
-vim.cmd([[
+vim.cmd
+[[
 
 call plug#begin()
 
-Plug 'm4xshen/autoclose.nvim'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'xeluxee/competitest.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'folke/tokyonight.nvim'
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'rcarriga/nvim-notify'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'folke/tokyonight.nvim'
+Plug 'folke/noice.nvim'
 Plug 'nvimdev/dashboard-nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'm4xshen/autoclose.nvim'
+Plug 'xeluxee/competitest.nvim'
+Plug 'nvim-tree/nvim-tree.lua'
 
 call plug#end()
+
 PlugInstall
 q
 
-]])
-
--- Options
+]]
 
 require("autoclose").setup()
+require("bufferline").setup{}
+require("lualine").setup()
+require("telescope").setup()
+require("noice").setup()
+require("dashboard").setup({
+	theme = 'doom',
+	config = {
+		header = {
+			'',
+			'',
+			' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+			' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+			' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+			' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+			' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+			' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',	
+			'',
+			'',	
+		},
+    	center = {
+      		{ icon = " ", desc = "Find File                            ",      key = "f", action = "Telescope find_files", key_format = "%s" },
+    		{ icon = " ", desc = "New File                            ",       key = "n", action = "enew", key_format = "%s" },
+		{ icon = " ", desc = "Recieve Problem                      ", key = "p", action = "Com receive problem", key_format = "%s" },
+     		{ icon = " ", desc = "Recent Files                            ",   key = "r", action = "Telescope oldfiles", key_format = "%s" },
+      		{ icon = " ", desc = "Find Text                            ",      key = "t", action = "Telescope live_grep", key_format = "%s" },
+      		{ icon = " ", desc = "Config                            ",         key = "c", action = "edit ~/.config/nvim/init.lua", key_format = "%s" },
+      		{ icon = " ", desc = "Quit                            ",           key = "q", action = "qa", key_format = "%s" },
+    	},
+    	footer = { "https://github.com/MihneaTs1/dotfiles" },
+	},
+})
+require("nvim-tree").setup()
 require("competitest").setup {
-	received_problems_path = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)/$(PROBLEM)/main.$(FEXT)",
-	received_contests_directory = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)",
-	received_contests_problems_path = "$(PROBLEM)/main.$(FEXT)",
+	save_current_file = false,
+	compile_directory = ".",
 	compile_command = {
 		cpp = { exec = "g++", args = { "-std=gnu++23", "-Wall", "-DLOCAL", "$(FNAME)", "-o", "$(FNOEXT)" } },
 	},
-
+	view_output_diff = true,
+	
 	testcases_directory = "./.competitest",
+	testcases_use_single_file = true,
+	
+	recieve_print_message = false,
 	template_file = "$(HOME)/.config/nvim/template/template.cpp",
 	evaluate_template_modifiers = true,
+	received_problems_path = "$(HOME)/Documents/Programming/Competititve/$(JUDGE)/$(CONTEST)/$(PROBLEM)/main.$(FEXT)",
+	received_problems_prompt_path = false,
+	received_contests_directory = "$(HOME)/Documents/Programming/Competitive/$(JUDGE)/$(CONTEST)",
+	received_contests_problems_path = "$(PROBLEM)/main.$(FEXT)",
+	received_contests_prompt_directory = false,
+	received_contests_prompt_extension = false,
 }
-require("nvim-treesitter.configs").setup {
-	highlight = {
-		enable = true,
-	},
-}
-require("nvim-tree").setup()
-require("lualine").setup()
 
-require('dashboard').setup({
-  theme = 'doom',
-  config = {
-    header = {
-	  "",
-	  "",
- 	  ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-	  ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-	  ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-	  ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-	  ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-	  ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-      "",
-	  "",
-    },
-    center = {
-	{
-        icon = ' ',
-        icon_hl = 'Title',
-        desc = 'New File',
-        desc_hl = 'String',
-        key = 'n',
-        keymap = 'enew',
-        key_hl = 'Number',
-        key_format = ' %s',
-        action = 'enew',
-      },
-      {
-        icon = ' ',
-        icon_hl = 'Title',
-        desc = 'Receive Problem',
-        desc_hl = 'String',
-        key = 'p',
-        keymap = 'Com receive problem',
-        key_hl = 'Number',
-        key_format = ' %s',
-        action = 'Com receive problem',
-      },
+-- Options
 
-      {
-        icon = ' ',
-        icon_hl = 'Title',
-        desc = 'Find File',
-        desc_hl = 'String',
-        key = 'f',
-        keymap = 'Telescope find_files',
-        key_hl = 'Number',
-        key_format = ' %s',
-        action = 'Telescope find_files',
-      },
-      {
-        icon = ' ',
-        icon_hl = 'Title',
-        desc = 'Recent Files',
-        desc_hl = 'String',
-        key = 'r',
-        keymap = 'Telescope oldfiles',
-        key_hl = 'Number',
-        key_format = ' %s',
-        action = 'Telescope oldfiles',
-      },
-      {
-        icon = ' ',
-        icon_hl = 'Title',
-        desc = 'Edit Config',
-        desc_hl = 'String',
-        key = 'c',
-        keymap = 'edit ~/.config/nvim/init.lua',
-        key_hl = 'Number',
-        key_format = ' %s',
-        action = 'edit ~/.config/nvim/init.lua',
-      },
-	  {
-        icon = ' ',
-        icon_hl = 'Title',
-        desc = 'Quit',
-        desc_hl = 'String',
-        key = 'q',
-        keymap = 'quit',
-        key_hl = 'Number',
-        key_format = ' %s',
-        action = 'quit',
-      },
-    },
-    footer = {
-      "Happy Coding!",
-	  "https://github.com/MihneaTs1/dotfiles",
-    },
-  },
-})
-require("telescope").setup()
+vim.cmd
+[[
 
-vim.o.tabstop=4
-vim.o.shiftwidth=4
-vim.o.number=true
-vim.cmd([[
-	set clipboard=unnamedplus
-	set laststatus=3
-	set noshowmode
-	colorscheme tokyonight-night
-]])
+set tabstop=4
+set shiftwidth=4
+set number
+colorscheme tokyonight-night
+set clipboard=unnamedplus
+
+]]
