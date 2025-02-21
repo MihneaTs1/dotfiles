@@ -35,6 +35,7 @@ require("nvim-treesitter.configs").setup {
 	sync_install = true,
 	auto_install = true,
 	highlight = {
+		enable = true,
 		additional_vim_regex_highlighting = true,
 	}
 }
@@ -44,6 +45,7 @@ require("lualine").setup()
 require("noice").setup()
 require("telescope").setup()
 require("ibl").setup()
+
 require("competitest").setup {
 	save_current_file = false,
 	compile_directory = ".",
