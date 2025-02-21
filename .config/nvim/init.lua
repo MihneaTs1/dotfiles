@@ -8,6 +8,9 @@ vim.cmd([[
 	Plug 'MunifTanjim/nui.nvim'
 	Plug 'rcarriga/nvim-notify'
 	Plug 'nvim-tree/nvim-web-devicons'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'BurntSushi/ripgrep'
+	Plug 'sharkdp/fd'
 
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'folke/tokyonight.nvim'
@@ -16,6 +19,8 @@ vim.cmd([[
 	Plug 'nvim-lualine/lualine.nvim'
 	Plug 'akinsho/bufferline.nvim'
 	Plug 'xeluxee/competitest.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'lukas-reineke/indent-blankline.nvim'
 
 	call plug#end()
 
@@ -37,6 +42,8 @@ require("bufferline").setup()
 require("autoclose").setup()
 require("lualine").setup()
 require("noice").setup()
+require("telescope").setup()
+require("ibl").setup()
 require("competitest").setup {
 	save_current_file = false,
 	compile_directory = ".",
