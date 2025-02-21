@@ -44,10 +44,8 @@ require("competitest").setup {
 		cpp = { exec = "g++", args = { "-std=gnu++23", "-Wall", "-DLOCAL", "$(FNAME)", "-o", "$(FNOEXT)" } },
 	},
 	view_output_diff = true,
-	
 	testcases_directory = "./.competitest",
 	testcases_use_single_file = true,
-	
 	recieve_print_message = false,
 	template_file = "$(HOME)/.config/nvim/template/template.cpp",
 	evaluate_template_modifiers = true,
