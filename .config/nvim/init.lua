@@ -24,18 +24,18 @@ vim.cmd([[
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'lukas-reineke/indent-blankline.nvim'
 	Plug 'neovim/nvim-lspconfig'
-  	Plug 'hrsh7th/nvim-cmp'
-  	Plug 'hrsh7th/cmp-nvim-lsp'
-  	Plug 'L3MON4D3/LuaSnip'
-  	Plug 'saadparwaiz1/cmp_luasnip'
+	Plug 'hrsh7th/nvim-cmp'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'L3MON4D3/LuaSnip'
+	Plug 'saadparwaiz1/cmp_luasnip'
 	Plug 'nvim-tree/nvim-tree.lua'
+	Plug 'Pocco81/auto-save.nvim'
 
 	call plug#end()
-
-	PlugInstall
-	PlugUpdate
+	
 	PlugUpgrade
-	q
+	PlugInstall | q
+	PlugUpdate | q
 ]])
 
 local cmp = require('cmp')
@@ -43,7 +43,7 @@ cmp.setup({
 	snippet = {
 		expand = function(args)
 			require('luasnip').lsp_expand(args.body)
-    	end,
+	end,
 	},
 	mapping = {
 		['<C-n>'] = cmp.mapping.select_next_item(),
@@ -59,10 +59,10 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.clangd.setup({
-  init_options = {
-    fallbackFlags = { "-std=gnu++23", "-Wall", "-DLOCAL", "-Wno-unknown-pragmas", "-Wno-unused-variable" },
-  },
-  capabilities = capabilities,
+	init_options = {
+		fallbackFlags = { "-std=gnu++23", "-Wall", "-DLOCAL", "-Wno-unknown-pragmas", "-Wno-unused-variable" },
+	},
+	capabilities = capabilities,
 })
 lspconfig.pyright.setup {
 	capabilities = capabilities,
@@ -103,10 +103,11 @@ require("ibl").setup {
 		enabled = false,
 	},
 }
+require("telescope").setup()
+require("auto-save").setup()
 require("bufferline").setup()
 require("nvim-tree").setup()
 require("autoclose").setup()
-require("telescope").setup()
 require("lualine").setup()
 require("noice").setup()
 
@@ -125,5 +126,6 @@ vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, s
 vim.api.nvim_set_keymap('n', '<C-S-r>', ':Com run <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-s>', '<Esc> :w <CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-h>', ':split | terminal <CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-v>', ':vsplit | terminal <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-h>', ':split | terminal <CR>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-v>', ':vsplit | terminal <CR>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ff', ':Telescope find_files <CR>', { noremap = true, silent = true })
