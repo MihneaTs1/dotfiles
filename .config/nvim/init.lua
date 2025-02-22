@@ -34,9 +34,10 @@ vim.cmd([[
 
 	call plug#end()
 	
+	PlugInstall
+	PlugUpdate
 	PlugUpgrade
-	PlugInstall | q
-	PlugUpdate | q
+	q
 ]])
 
 local cmp = require('cmp')
