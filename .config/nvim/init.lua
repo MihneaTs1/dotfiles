@@ -30,6 +30,7 @@ vim.cmd([[
 	Plug 'saadparwaiz1/cmp_luasnip'
 	Plug 'nvim-tree/nvim-tree.lua'
 	Plug 'Pocco81/auto-save.nvim'
+	Plug 'nvimdev/dashboard-nvim'
 
 	call plug#end()
 	
@@ -67,6 +68,71 @@ lspconfig.clangd.setup({
 lspconfig.pyright.setup {
 	capabilities = capabilities,
 }
+require('dashboard').setup({
+	theme = 'doom', 
+	config = {
+		header = {
+			'',
+			'',
+			' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+			' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+			' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+			' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+			' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+			' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+			'',
+			'',
+		},
+		center = {
+    		{
+    			icon = "  ",
+			    desc = "New File                ",
+				action = "enew",
+				key = 'n',
+				key_format = ' %s',
+			},
+			{
+    			icon = "  ",
+				desc = "Open File                                ",
+				action = "Telescope find_files",
+				key = 'ff',
+				key_format = ' %s',
+			},
+    		{
+				icon = "  ",
+				desc = "Recent Files                                ",
+				action = "Telescope oldfiles",
+				key = 'fr',
+				key_format = ' %s',
+			},
+			{
+        		icon = "  ",
+        		desc = "Find Text                               ",
+        		action = "Telescope live_grep",
+				key = 'ft',
+				key_format = ' %s',
+			},
+			{
+				icon = "  ",
+        		desc = "Config                                ",
+				action = "Telescope find_files cwd=~/.config/nvim",
+				key = 'c',
+				key_format = ' %s',
+			},
+			{
+				icon = "  ",
+				desc = "Quit                ",
+				action = "qa",
+				key = 'q',
+				key_format = ' %s',
+			}
+    	},
+    	footer = {
+			'https://github.com/MihneaTs1/dotfiles'
+		}
+	}
+})
+
 require("competitest").setup {
 	save_current_file = false,
 	compile_directory = ".",
@@ -102,6 +168,15 @@ require("ibl").setup {
 	scope = {
 		enabled = false,
 	},
+	exclude = {
+		filetypes = {
+			'dashboard',
+    	},
+		buftypes = {
+			'nofile',
+			'terminal',
+		},
+	},
 }
 require("telescope").setup()
 require("auto-save").setup()
@@ -119,8 +194,15 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus" 
 vim.opt.splitbelow = true
-vim.o.splitright = true
+vim.opt.splitright = true
+vim.opt.lazyredraw = true
 vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd [[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+  augroup end
+]]
 
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-S-r>', ':Com run <CR>', { noremap = true, silent = true })
@@ -128,4 +210,7 @@ vim.api.nvim_set_keymap('n', '<C-s>', ':w <CR>', { noremap = true, silent = true
 vim.api.nvim_set_keymap('i', '<C-s>', '<Esc> :w <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-h>', ':split | terminal <CR>i', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-v>', ':vsplit | terminal <CR>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'ff', ':Telescope find_files <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ff', ':Telescope fd <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'fr', ':Telescope oldfiles <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ft', ':Telescope live_grep <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-r>', ':Com receive problem <CR>', { noremap = true, silent = true })
