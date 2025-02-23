@@ -31,6 +31,7 @@ vim.cmd([[
 	Plug 'nvim-tree/nvim-tree.lua'
 	Plug 'Pocco81/auto-save.nvim'
 	Plug 'nvimdev/dashboard-nvim'
+	Plug 'tiagovla/scope.nvim'
 
 	call plug#end()
 	
@@ -179,13 +180,18 @@ require("ibl").setup {
 		},
 	},
 }
+require("bufferline").setup {
+	options = {
+		mode = "buffers",
+	},
+}
 require("telescope").setup()
 require("auto-save").setup()
-require("bufferline").setup()
 require("nvim-tree").setup()
 require("autoclose").setup()
 require("lualine").setup()
 require("noice").setup()
+require("scope").setup()
 
 -- Options
 
@@ -209,9 +215,12 @@ vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, s
 vim.api.nvim_set_keymap('n', '<C-S-r>', ':Com run <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-s>', '<Esc> :w <CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-h>', ':split | terminal <CR>:set nonumber | set norelativenumber | hor res 10<CR>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-v>', ':vsplit | terminal <CR>:set nonumber | set norelativenumber <CR>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-h>', ':split | terminal <CR>:hor res 10 <CR>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-v>', ':vsplit | terminal <CR>i', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ff', ':Telescope fd <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fr', ':Telescope oldfiles <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'ft', ':Telescope live_grep <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-r>', ':Com receive problem <CR>', { noremap = true, silent = true })
+
+vim.cmd[[cabbrev <expr> q getcmdtype() == ':' && getcmdline() ==# 'q' ? 'bd' : 'q']]
+
