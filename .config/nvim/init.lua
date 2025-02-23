@@ -222,5 +222,3 @@ vim.api.nvim_set_keymap('n', 'fr', ':Telescope oldfiles <CR>', { noremap = true,
 vim.api.nvim_set_keymap('n', 'ft', ':Telescope live_grep <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-r>', ':Com receive problem <CR>', { noremap = true, silent = true })
 
-vim.cmd[[cabbrev <expr> q getcmdtype() == ':' && getcmdline() ==# 'q' ? 'bd' : 'q']]
-
