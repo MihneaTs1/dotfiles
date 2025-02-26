@@ -14,50 +14,35 @@ ___  ___          _        _            ___  ____ _                    _____ _  
 #pragma GCC target("avx2,popcnt,tune=native")
 using namespace std;
 
-const string TASK_NAME = "";
-#define   DSYNC_WITH_STDIO 1
-#define        USE_FILE_IO 0
-
-#define MULTIPLE_TESTCASES 1
-#define  DEF_INT_LONG_LONG 1
-
-#if !defined(LOCAL) && USE_FILE_IO == 1
-ifstream fin(TASK_NAME + ".in");
-ofstream fout(TASK_NAME + ".out");
-#define cin fin
-#define cout fout
-#endif
+#define DEFINE_INT_LONG_LONG 1
+#define FAST_IO 1
+#define FILE_IO 0
 
 #define ll long long
 #define ull unsigned long long
-#if DEF_INT_LONG_LONG == 1
+#if DEFINE_INT_LONG_LONG == 1
 #define int long long
 #define uint unsigned long long
 #else
 #define uint unsigned int
 #endif
 
-// $(JUDGE)/$(CONTEST)/$(PROBLEM) 
-// TL: $(TIMELIM) ms
-// ML: $(MEMLIM) MB	
+#if !defined(LOCAL) && FILE_IO == 1
+ifstream fin(TASK_NAME + ".in");
+ofstream fout(TASK_NAME + ".out");
+#define cin fin
+#define cout fout
+#endif
 
-void pregen() {
+void solve() {
 	
 }
 
-unsigned TESTCASE_COUNT = 1;
-void run(const unsigned &TESTCASE) {
-
-}
-
 signed main() {
-#if DSYNC_WITH_STDIO == 1
+#if FAST_IO == 1
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 #endif
-	pregen();
-	if (MULTIPLE_TESTCASES)
-		cin >> TESTCASE_COUNT;
-	for (unsigned TESTCASE = 1; TESTCASE <= TESTCASE_COUNT; run(TESTCASE ++));
+	solve();
 	return 0;
 }
