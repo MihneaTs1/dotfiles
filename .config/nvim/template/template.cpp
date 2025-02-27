@@ -34,6 +34,10 @@ ofstream fout(TASK_NAME + ".out");
 #define cout fout
 #endif
 
+// $(JUDGE)/$(CONTEST)/$(PROBLEM)
+// TL: $(TIMELIM) ms
+// ML: $(MEMLIM) MB
+
 void solve() {
 	
 }
