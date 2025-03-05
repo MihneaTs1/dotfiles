@@ -1,5 +1,4 @@
 vim.loader.enable()
-
 vim.opt.termguicolors = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -23,64 +22,37 @@ vim.g.maplocalleader = "\\"
 
 require("lazy").setup({
   spec = {
-    { "MunifTanjim/nui.nvim" },
-    { "rcarriga/nvim-notify" },
-    { "nvim-tree/nvim-web-devicons" },
-    { "nvim-lua/plenary.nvim" },
-    { "BurntSushi/ripgrep" },
-    { "sharkdp/fd" },
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    { "folke/tokyonight.nvim" },
-    { "m4xshen/autoclose.nvim" },
-    { "folke/noice.nvim" },
-    { "nvim-lualine/lualine.nvim" },
-    { "akinsho/bufferline.nvim" },
-    { "xeluxee/competitest.nvim" },
-    { "nvim-telescope/telescope.nvim" },
-    { "lukas-reineke/indent-blankline.nvim" },
-    { "neovim/nvim-lspconfig" },
-    { "hrsh7th/nvim-cmp" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "L3MON4D3/LuaSnip" },
-    { "saadparwaiz1/cmp_luasnip" },
-    { "nvim-tree/nvim-tree.lua" },
-    { "Pocco81/auto-save.nvim" },
-    { "nvimdev/dashboard-nvim" },
-    { "tiagovla/scope.nvim" },
+    { "MunifTanjim/nui.nvim", lazy = true },
+    { "rcarriga/nvim-notify", lazy = true },
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+    { "nvim-lua/plenary.nvim", lazy = true },
+    { "BurntSushi/ripgrep", lazy = true },
+    { "sharkdp/fd", lazy = true },
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = "BufReadPost" },
+    { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+    { "m4xshen/autoclose.nvim", event = "InsertEnter" },
+    { "folke/noice.nvim", event = "VeryLazy" },
+    { "akinsho/bufferline.nvim", event = "VeryLazy" },
+    { "xeluxee/competitest.nvim", cmd = { "CompetiTest" } },
+    { "nvim-telescope/telescope.nvim", cmd = "Telescope" },
+    { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost" },
+    { "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
+    { "hrsh7th/nvim-cmp", event = "InsertEnter" },
+    { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+    { "L3MON4D3/LuaSnip", event = "InsertEnter" },
+    { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
+    { "nvim-tree/nvim-tree.lua", cmd = { "NvimTreeToggle", "NvimTreeFocus" } },
+    { "Pocco81/auto-save.nvim", event = { "InsertLeave", "TextChanged" } },
+    { "nvimdev/dashboard-nvim", lazy = false, priority = 1000 },
+    { "tiagovla/scope.nvim", event = "TabNew" },
+    { "nvim-lualine/lualine.nvim", lazy = false, priority = 1000 },
+    { "echasnovski/mini.icons", lazy = false, priority = 1000 },
+    { "folke/snacks.nvim", lazy = false, priority = 1000 },
   },
   install = { colorscheme = { "tokyonight-night" } },
   checker = { enabled = true },
 })
 
-local cmp = require('cmp')
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require('luasnip').lsp_expand(args.body)
-	end,
-	},
-	mapping = {
-		['<C-n>'] = cmp.mapping.select_next_item(),
-		['<C-p>'] = cmp.mapping.select_prev_item(),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<Tab>'] = cmp.mapping.confirm({ select = true }),
-	},
-	sources = {
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
-	},
-})
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
-lspconfig.clangd.setup({
-	init_options = {
-		fallbackFlags = { "-std=gnu++23", "-Wall", "-DLOCAL", "-Wno-unknown-pragmas", "-Wno-unused-variable" },
-	},
-	capabilities = capabilities,
-})
-lspconfig.pyright.setup {
-	capabilities = capabilities,
-}
 require('dashboard').setup({
 	theme = 'doom', 
 	config = {
@@ -145,7 +117,35 @@ require('dashboard').setup({
 		}
 	}
 })
-
+local cmp = require('cmp')
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+	end,
+	},
+	mapping = {
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-p>'] = cmp.mapping.select_prev_item(),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<Tab>'] = cmp.mapping.confirm({ select = true }),
+	},
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	},
+})
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
+lspconfig.clangd.setup({
+	init_options = {
+		fallbackFlags = { "-std=gnu++23", "-Wall", "-DLOCAL", "-Wno-unknown-pragmas", "-Wno-unused-variable" },
+	},
+	capabilities = capabilities,
+})
+lspconfig.pyright.setup {
+	capabilities = capabilities,
+}
 require("competitest").setup {
 	save_current_file = false,
 	compile_directory = ".",
@@ -169,8 +169,6 @@ require("competitest").setup {
 	received_contests_prompt_extension = false,
 }
 require("nvim-treesitter.configs").setup {
-	ensure_installed = {"c", "cpp", "lua", "vim", "python"},
-	sync_install = true,
 	auto_install = true,
 	highlight = {
 		enable = true,
@@ -196,11 +194,17 @@ require("bufferline").setup {
 		mode = "buffers",
 	},
 }
+require("lualine").setup {
+	options = {
+		disabled_filetypes = {
+			statusline = {"dashboard", "NvimTree"},
+		},
+	},
+}
 require("telescope").setup()
 require("auto-save").setup()
 require("nvim-tree").setup()
 require("autoclose").setup()
-require("lualine").setup()
 require("noice").setup()
 require("scope").setup()
 
