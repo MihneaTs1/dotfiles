@@ -52,7 +52,7 @@ cmp.setup({
 		['<C-n>'] = cmp.mapping.select_next_item(),
 		['<C-p>'] = cmp.mapping.select_prev_item(),
 		['<C-Space>'] = cmp.mapping.complete(),
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
+		['<Tab>'] = cmp.mapping.confirm({ select = true }),
 	},
 	sources = {
 		{ name = 'nvim_lsp' },
@@ -205,14 +205,14 @@ vim.opt.splitright = true
 vim.opt.lazyredraw = true
 vim.cmd[[colorscheme tokyonight-night]]
 vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-  augroup end
+	augroup YankHighlight
+		autocmd!
+		autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+	augroup end
 ]]
 
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-S-r>', ':Com run <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-r>', ':Com run <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-s>', '<Esc> :w <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-h>', ':split | terminal <CR>:hor res 10 <CR>i', { noremap = true, silent = true })
