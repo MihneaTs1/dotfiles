@@ -1,45 +1,56 @@
 vim.loader.enable()
+
 vim.opt.termguicolors = true
 
--- Plugins
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd([[
-	call plug#begin()
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
-	" Dependencies
-	Plug 'MunifTanjim/nui.nvim'
-	Plug 'rcarriga/nvim-notify'
-	Plug 'nvim-tree/nvim-web-devicons'
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'BurntSushi/ripgrep'
-	Plug 'sharkdp/fd'
-	" Plugins
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-	Plug 'folke/tokyonight.nvim'
-	Plug 'm4xshen/autoclose.nvim'
-	Plug 'folke/noice.nvim'
-	Plug 'nvim-lualine/lualine.nvim'
-	Plug 'akinsho/bufferline.nvim'
-	Plug 'xeluxee/competitest.nvim'
-	Plug 'nvim-telescope/telescope.nvim'
-	Plug 'lukas-reineke/indent-blankline.nvim'
-	Plug 'neovim/nvim-lspconfig'
-	Plug 'hrsh7th/nvim-cmp'
-	Plug 'hrsh7th/cmp-nvim-lsp'
-	Plug 'L3MON4D3/LuaSnip'
-	Plug 'saadparwaiz1/cmp_luasnip'
-	Plug 'nvim-tree/nvim-tree.lua'
-	Plug 'Pocco81/auto-save.nvim'
-	Plug 'nvimdev/dashboard-nvim'
-	Plug 'tiagovla/scope.nvim'
-
-	call plug#end()
-	
-	PlugInstall
-	PlugUpdate
-	PlugUpgrade
-	q
-]])
+require("lazy").setup({
+  spec = {
+    { "MunifTanjim/nui.nvim" },
+    { "rcarriga/nvim-notify" },
+    { "nvim-tree/nvim-web-devicons" },
+    { "nvim-lua/plenary.nvim" },
+    { "BurntSushi/ripgrep" },
+    { "sharkdp/fd" },
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "folke/tokyonight.nvim" },
+    { "m4xshen/autoclose.nvim" },
+    { "folke/noice.nvim" },
+    { "nvim-lualine/lualine.nvim" },
+    { "akinsho/bufferline.nvim" },
+    { "xeluxee/competitest.nvim" },
+    { "nvim-telescope/telescope.nvim" },
+    { "lukas-reineke/indent-blankline.nvim" },
+    { "neovim/nvim-lspconfig" },
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "L3MON4D3/LuaSnip" },
+    { "saadparwaiz1/cmp_luasnip" },
+    { "nvim-tree/nvim-tree.lua" },
+    { "Pocco81/auto-save.nvim" },
+    { "nvimdev/dashboard-nvim" },
+    { "tiagovla/scope.nvim" },
+  },
+  install = { colorscheme = { "tokyonight-night" } },
+  checker = { enabled = true },
+})
 
 local cmp = require('cmp')
 cmp.setup({
