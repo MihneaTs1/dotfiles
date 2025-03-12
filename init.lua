@@ -14,9 +14,6 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.cmd("set cursorlineopt=number")
 
--- Toggle Neotree on the right side
-vim.cmd("Neotree toggle right")
-
 -- Highlight on yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
