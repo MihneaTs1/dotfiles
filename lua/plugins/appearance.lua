@@ -151,5 +151,8 @@ return {
       }
     end,
   },
+  {
+    "REslim30/vim-smoothie",
+  },
 }
 
