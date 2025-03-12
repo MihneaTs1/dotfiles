@@ -1,22 +1,29 @@
--- Lazy Config
+
+-- init.lua
+-- Main configuration file for Neovim
+
+-- Load lazy configuration
 require("config.lazy")
 
--- Options
-vim.cmd[[
-	set tabstop=4
-	set shiftwidth=4
-	set number
-	set relativenumber
-	set clipboard=unnamedplus
-	set cursorline
-	set cursorlineopt=number
-	Neotree toggle right
-]]
+-- Neovim Options
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.cursorline = true
+vim.cmd("set cursorlineopt=number")
 
--- Highlight on copy
-vim.cmd [[
-	augroup YankHighlight
-		autocmd!
-		autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-	augroup end
-]]
+-- Toggle Neotree on the right side
+vim.cmd("Neotree toggle right")
+
+-- Highlight on yank
+vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = "YankHighlight",
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank { higroup = "IncSearch", timeout = 150 }
+  end,
+})
+
